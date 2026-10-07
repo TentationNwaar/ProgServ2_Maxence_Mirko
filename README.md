@@ -224,8 +224,9 @@ personnes et bien plus encore.
 
 - Inscription, connexion, déconnexion (e-mail + mot de passe)
 - Modification du profil (bio, équipes favorites)
-- Liste des matchs du jour et page d'un match
-- Noter un match et écrire une review
+- Liste des matchs du jour
+- Page du match
+- Noter un match et écrire une review (ajout liste et favoris)
 - Journal personnel : historique des matchs notés
 - Liste "à regarder"
 - Rôle administrateur : ajouter et modifier les matchs
