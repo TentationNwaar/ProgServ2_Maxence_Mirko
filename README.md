@@ -213,64 +213,116 @@ Weyermann Maxence & Martone Mirko
 
 ## 2. Présentation du projet
 
-Dans le monde du football, il y a énormément de compétitions et de matchs
-différents toutes les semaines, et il arrive souvent qu'en tant que fan qui
-supporte plusieurs équipes ou simplement par envie de vouloir suivre des matchs
-on se sente un peu submergé par les différentes compétitions. Notre objectif est
-de tout centraliser pour voir les matchs, donner son avis, suivre d'autres
-personnes et bien plus encore.
+Dans le football, il existe de nombreuses applications pour suivre son équipe,
+suivre les matchs, s'informer ou noter les joueurs lors d'une rencontre.
+En revanche, il n'existe pas réellement d'application communautaire permettant
+de noter les matchs et de garder une trace de ceux qu'on a regardés, en
+particulier ceux qui nous ont fait vibrer.
+
+L'aspect communautaire est lui aussi limité : à part les réseaux sociaux
+traditionnels, il n'existe pas d'espace dédié pour discuter des matchs, des
+équipes, etc.
+
+Fulltimed répond à ce besoin. L'application permet de :
+
+- garder une trace des matchs regardés ;
+- noter les matchs et les commenter ;
+- ajouter des matchs à une liste « à voir » ;
+- interagir avec les autres utilisateurs autour des matchs, dans une logique
+  communautaire.
 
 ## 3. Fonctionnalités principales
 
+### Authentification
 - Inscription, connexion, déconnexion (e-mail + mot de passe)
-- Modification du profil (bio, équipes favorites)
-- Liste des matchs du jour
-- Page du match
-- Noter un match et écrire une review (ajout liste et favoris)
-- Journal personnel : historique des matchs notés
-- Liste "à regarder"
-- Rôle administrateur : ajouter et modifier les matchs
+
+### Page d'accueil
+- Aperçu des matchs principaux
+- Un bouton « Voir plus » redirige vers la page Matchs
+
+### Page Matchs
+- Matchs du jour
+- Filtre par compétition
+- Calendrier
+
+### Page d'un match
+- Informations utiles : description, stade, classement, forme des équipes
+- Actions : noter le match, l'ajouter à la liste « à regarder », le mettre en favori, le commenter
+- Avis de la communauté et note moyenne
+
+### Page Communauté
+- Derniers posts de la communauté sur différents matchs
+- Chaque post contient : nom d'utilisateur, note du match, match concerné, commentaire
+- Posts des amis
+- Clic sur un nom d'utilisateur pour accéder à son profil
+- Possibilité de répondre à un post et de le liker
+
+### Profil personnel
+- Liste des matchs à regarder
+- Historique des matchs notés
+- Liste des matchs commentés
+- Matchs préférés (favori)
+- Équipes préférées
+- Bio, nom d'utilisateur, adresse e-mail
+- Bouton de modification du profil (bio, équipes favorites, nom d'utilisateur)
+
+### Profil d'un autre utilisateur (ami)
+- Liste des matchs à regarder
+- Derniers matchs vus
+- Liste des matchs commentés
+- Équipes préférées
+- Bio, nom d'utilisateur
+- Bouton « Ajouter en ami »
+- Matchs préférés (favori)
+
+### Rôle administrateur
+- Ajout et modification des matchs
+  - Bouton « Ajouter un match » dans la page Matchs
+  - Formulaire d'ajout prédéfini, il suffit de remplir les informations
+- Modération : suppression de commentaires, suppression d'utilisateurs
+
+### Autres
 - Deux langues (français, anglais)
-- Envoi d'un e-mail (par exemple un e-mail de bienvenue à l'inscription)
-- Les matchs sont ajoutés par l'administrateur et un jeu de données de test est
-  fourni dans un fichier SQL.
+- Envoi d'un e-mail (ex. e-mail de bienvenue à l'inscription)
+- Les matchs sont ajoutés par l'administrateur ; un jeu de données de test est fourni dans un fichier SQL
 
-## 4. Fonctionnalités optionnelles
+## 4. Utilisateurs et rôles
 
-- Calendrier pour parcourir les jours
-- Onglet "populaires"
-- Suivre un autre utilisateur, feed d'activité
-- Liker et commenter une review
-- Photo de profil
-
-## 5. Utilisateurs et rôles
-
-| Action                                 | Visiteur | Utilisateur | Administrateur |
-| :------------------------------------- | :------: | :---------: | :------------: |
-| Voir la liste des matchs du jour       |   Oui    |     Oui     |      Oui       |
-| Voir la page d'un match et ses reviews |   Oui    |     Oui     |      Oui       |
-| Créer un compte / se connecter         |   Oui    |     Non     |      Non       |
-| Noter un match et écrire une review    |   Non    |     Oui     |      Oui       |
-| Consulter son journal personnel        |   Non    |     Oui     |      Oui       |
-| Gérer sa liste "à regarder"            |   Non    |     Oui     |      Oui       |
-| Modifier son profil                    |   Non    |     Oui     |      Oui       |
-| Ajouter / modifier un match            |   Non    |     Non     |      Oui       |
+| Action                                           | Visiteur | Utilisateur | Administrateur |
+| :----------------------------------------------- | :------: | :---------: | :------------: |
+| Créer un compte / se connecter                   |   Oui    |     Non     |      Non       |
+| Voir la page d'accueil et les matchs du jour     |   Oui    |     Oui     |      Oui       |
+| Voir la page d'un match, sa note moyenne et ses commentaires | Oui | Oui |      Oui       |
+| Noter et commenter un match                      |   Non    |     Oui     |      Oui       |
+| Ajouter un match à sa liste « à regarder »       |   Non    |     Oui     |      Oui       |
+| Consulter son profil et son historique           |   Non    |     Oui     |      Oui       |
+| Modifier son profil                              |   Non    |     Oui     |      Oui       |
+| Voir la page Communauté et les profils des autres |  Non    |     Oui     |      Oui       |
+| Liker / répondre à un post                       |   Non    |     Oui     |      Oui       |
+| Ajouter un utilisateur en ami                    |   Non    |     Oui     |      Oui       |
+| Ajouter / modifier un match                      |   Non    |     Non     |      Oui       |
+| Supprimer un commentaire ou un utilisateur       |   Non    |     Non     |      Oui       |
 
 **Pages publiques** (accessibles sans connexion) :
 
-- Liste des matchs du jour (accueil)
-- Page d'un match et de ses reviews
+- Page d'accueil (aperçu des matchs principaux)
+- Page Matchs (matchs du jour, filtre par compétition, calendrier)
+- Page d'un match (infos, note moyenne, commentaires de la communauté)
 - Inscription
 - Connexion
 
 **Pages privées** (accessibles après connexion) :
 
-- Journal personnel
-- Liste "à regarder"
+- Profil personnel (historique des matchs notés, liste « à regarder », matchs commentés)
 - Modification du profil
-- Écriture d'une review
-- Gestion des matchs (administrateur uniquement)
-- Profil personnel
+- Page Communauté
+- Profil d'un autre utilisateur
+- Notation et commentaire d'un match (depuis la page du match)
+
+**Pages réservées à l'administrateur** :
+
+- Formulaire d'ajout / modification d'un match
+- Modération (suppression de commentaires et d'utilisateurs)
 
 ## 6. Contexte
 
