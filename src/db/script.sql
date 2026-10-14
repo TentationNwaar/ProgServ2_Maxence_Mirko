@@ -1,14 +1,4 @@
--- ============================================================
--- Fulltimed : Modèle Physique de Données (MySQL / MariaDB)
--- ============================================================
-CREATE DATABASE IF NOT EXISTS fulltimed
-  CHARACTER SET utf8mb4
-  COLLATE utf8mb4_unicode_ci;
-USE fulltimed;
 
--- ------------------------------------------------------------
--- Tables de référence (normalisation)
--- ------------------------------------------------------------
 CREATE TABLE pays (
   id        INT UNSIGNED NOT NULL AUTO_INCREMENT,
   nom       VARCHAR(100) NOT NULL,
@@ -44,12 +34,9 @@ CREATE TABLE stade (
   nom    VARCHAR(150) NOT NULL,
   ville  VARCHAR(100) NOT NULL,
   PRIMARY KEY (id)
-  -- Facultatif : UNIQUE (nom, ville)
 ) ENGINE=InnoDB;
 
--- ------------------------------------------------------------
--- Tables principales
--- ------------------------------------------------------------
+
 CREATE TABLE utilisateur (
   id                 INT UNSIGNED NOT NULL AUTO_INCREMENT,
   username           VARCHAR(50)  NOT NULL,
@@ -117,9 +104,7 @@ CREATE TABLE avis (
   CHECK (note BETWEEN 0 AND 5)
 ) ENGINE=InnoDB;
 
--- ------------------------------------------------------------
--- Tables de jointure
--- ------------------------------------------------------------
+
 CREATE TABLE like_avis (
   id              INT UNSIGNED NOT NULL AUTO_INCREMENT,
   id_utilisateur  INT UNSIGNED NOT NULL,
@@ -160,9 +145,7 @@ CREATE TABLE equipe_preferee (
   FOREIGN KEY (id_equipe)      REFERENCES equipe (id)      ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- On ne peut pas se suivre soi-même (id_suiveur <> id_suivi) :
--- MySQL interdit un CHECK sur des colonnes qui ont un ON DELETE CASCADE,
--- cette règle est donc à vérifier dans le code PHP.
+
 CREATE TABLE suit (
   id          INT UNSIGNED NOT NULL AUTO_INCREMENT,
   id_suiveur  INT UNSIGNED NOT NULL,
@@ -173,8 +156,6 @@ CREATE TABLE suit (
   FOREIGN KEY (id_suivi)   REFERENCES utilisateur (id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- ------------------------------------------------------------
--- Valeurs de base nécessaires au fonctionnement de l'appli
--- ------------------------------------------------------------
+
 INSERT INTO role (nom) VALUES ('utilisateur'), ('administrateur');
 INSERT INTO type_equipe (nom) VALUES ('club'), ('sélection nationale');
