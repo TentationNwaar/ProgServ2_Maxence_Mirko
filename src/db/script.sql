@@ -1,3 +1,10 @@
+-- ============================================================
+-- Fulltimed : Modèle Physique de Données (MySQL / MariaDB)
+-- ============================================================
+-- CREATE DATABASE IF NOT EXISTS fulltimed
+--   CHARACTER SET utf8mb4
+--   COLLATE utf8mb4_unicode_ci;
+-- USE fulltimed;
 
 CREATE TABLE pays (
   id        INT UNSIGNED NOT NULL AUTO_INCREMENT,
