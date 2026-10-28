@@ -6,37 +6,24 @@ CREATE TABLE pays (
   PRIMARY KEY (id),
   UNIQUE (nom),
   UNIQUE (code_iso)
-) ENGINE=InnoDB;
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ 
 CREATE TABLE role (
   id   INT UNSIGNED NOT NULL AUTO_INCREMENT,
   nom  VARCHAR(50)  NOT NULL,
   PRIMARY KEY (id),
   UNIQUE (nom)
-) ENGINE=InnoDB;
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ 
 CREATE TABLE type_equipe (
   id   INT UNSIGNED NOT NULL AUTO_INCREMENT,
   nom  VARCHAR(50)  NOT NULL,
   PRIMARY KEY (id),
   UNIQUE (nom)
-) ENGINE=InnoDB;
-
-CREATE TABLE categorie (
-  id   INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  nom  VARCHAR(50)  NOT NULL,
-  PRIMARY KEY (id),
-  UNIQUE (nom)
-) ENGINE=InnoDB;
-
-CREATE TABLE stade (
-  id     INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  nom    VARCHAR(150) NOT NULL,
-  ville  VARCHAR(100) NOT NULL,
-  PRIMARY KEY (id)
-) ENGINE=InnoDB;
-
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ 
+ 
+ 
 CREATE TABLE utilisateur (
   id                 INT UNSIGNED NOT NULL AUTO_INCREMENT,
   username           VARCHAR(50)  NOT NULL,
@@ -48,8 +35,8 @@ CREATE TABLE utilisateur (
   UNIQUE (username),
   UNIQUE (email),
   FOREIGN KEY (id_role) REFERENCES role (id)
-) ENGINE=InnoDB;
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ 
 CREATE TABLE equipe (
   id               INT UNSIGNED NOT NULL AUTO_INCREMENT,
   nom              VARCHAR(100) NOT NULL,
@@ -57,11 +44,10 @@ CREATE TABLE equipe (
   id_pays          INT UNSIGNED NOT NULL,
   id_type_equipe   INT UNSIGNED NOT NULL,
   PRIMARY KEY (id),
-  -- Facultatif : UNIQUE (nom, id_pays)
   FOREIGN KEY (id_pays)        REFERENCES pays (id),
   FOREIGN KEY (id_type_equipe) REFERENCES type_equipe (id)
-) ENGINE=InnoDB;
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ 
 CREATE TABLE competition (
   id       INT UNSIGNED NOT NULL AUTO_INCREMENT,
   nom      VARCHAR(150) NOT NULL,
@@ -69,28 +55,24 @@ CREATE TABLE competition (
   PRIMARY KEY (id),
   UNIQUE (nom),
   FOREIGN KEY (id_pays) REFERENCES pays (id)
-) ENGINE=InnoDB;
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ 
 CREATE TABLE matchs (
   id                    INT UNSIGNED NOT NULL AUTO_INCREMENT,
   date_heure            DATETIME     NOT NULL,
   description           TEXT         NULL,
   score_domicile        TINYINT UNSIGNED NULL,
   score_exterieur       TINYINT UNSIGNED NULL,
-  id_stade              INT UNSIGNED NOT NULL,
   id_equipe_domicile    INT UNSIGNED NOT NULL,
   id_equipe_exterieur   INT UNSIGNED NOT NULL,
   id_competition        INT UNSIGNED NOT NULL,
-  id_categorie          INT UNSIGNED NULL,
   PRIMARY KEY (id),
-  FOREIGN KEY (id_stade)            REFERENCES stade (id),
   FOREIGN KEY (id_equipe_domicile)  REFERENCES equipe (id),
   FOREIGN KEY (id_equipe_exterieur) REFERENCES equipe (id),
   FOREIGN KEY (id_competition)      REFERENCES competition (id),
-  FOREIGN KEY (id_categorie)        REFERENCES categorie (id),
   CHECK (id_equipe_domicile <> id_equipe_exterieur)
-) ENGINE=InnoDB;
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ 
 CREATE TABLE avis (
   id              INT UNSIGNED NOT NULL AUTO_INCREMENT,
   note            TINYINT UNSIGNED NOT NULL,
@@ -102,9 +84,9 @@ CREATE TABLE avis (
   FOREIGN KEY (id_utilisateur) REFERENCES utilisateur (id) ON DELETE CASCADE,
   FOREIGN KEY (id_match)       REFERENCES matchs (id)      ON DELETE CASCADE,
   CHECK (note BETWEEN 0 AND 5)
-) ENGINE=InnoDB;
-
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ 
+ 
 CREATE TABLE like_avis (
   id              INT UNSIGNED NOT NULL AUTO_INCREMENT,
   id_utilisateur  INT UNSIGNED NOT NULL,
@@ -113,8 +95,8 @@ CREATE TABLE like_avis (
   UNIQUE (id_utilisateur, id_avis),
   FOREIGN KEY (id_utilisateur) REFERENCES utilisateur (id) ON DELETE CASCADE,
   FOREIGN KEY (id_avis)        REFERENCES avis (id)        ON DELETE CASCADE
-) ENGINE=InnoDB;
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ 
 CREATE TABLE a_regarder (
   id              INT UNSIGNED NOT NULL AUTO_INCREMENT,
   id_utilisateur  INT UNSIGNED NOT NULL,
@@ -123,8 +105,8 @@ CREATE TABLE a_regarder (
   UNIQUE (id_utilisateur, id_match),
   FOREIGN KEY (id_utilisateur) REFERENCES utilisateur (id) ON DELETE CASCADE,
   FOREIGN KEY (id_match)       REFERENCES matchs (id)      ON DELETE CASCADE
-) ENGINE=InnoDB;
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ 
 CREATE TABLE favori (
   id              INT UNSIGNED NOT NULL AUTO_INCREMENT,
   id_utilisateur  INT UNSIGNED NOT NULL,
@@ -133,8 +115,8 @@ CREATE TABLE favori (
   UNIQUE (id_utilisateur, id_match),
   FOREIGN KEY (id_utilisateur) REFERENCES utilisateur (id) ON DELETE CASCADE,
   FOREIGN KEY (id_match)       REFERENCES matchs (id)      ON DELETE CASCADE
-) ENGINE=InnoDB;
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ 
 CREATE TABLE equipe_preferee (
   id              INT UNSIGNED NOT NULL AUTO_INCREMENT,
   id_utilisateur  INT UNSIGNED NOT NULL,
@@ -143,9 +125,9 @@ CREATE TABLE equipe_preferee (
   UNIQUE (id_utilisateur, id_equipe),
   FOREIGN KEY (id_utilisateur) REFERENCES utilisateur (id) ON DELETE CASCADE,
   FOREIGN KEY (id_equipe)      REFERENCES equipe (id)      ON DELETE CASCADE
-) ENGINE=InnoDB;
-
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ 
+ 
 CREATE TABLE suit (
   id          INT UNSIGNED NOT NULL AUTO_INCREMENT,
   id_suiveur  INT UNSIGNED NOT NULL,
@@ -154,8 +136,8 @@ CREATE TABLE suit (
   UNIQUE (id_suiveur, id_suivi),
   FOREIGN KEY (id_suiveur) REFERENCES utilisateur (id) ON DELETE CASCADE,
   FOREIGN KEY (id_suivi)   REFERENCES utilisateur (id) ON DELETE CASCADE
-) ENGINE=InnoDB;
-
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ 
+ 
 INSERT INTO role (nom) VALUES ('utilisateur'), ('administrateur');
 INSERT INTO type_equipe (nom) VALUES ('club'), ('sélection nationale');

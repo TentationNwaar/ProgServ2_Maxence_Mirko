@@ -1,9 +1,10 @@
 <?php
-const DB_HOST = 'mariadb';
+<?php
+const DB_HOST = 'jp2f9l.myd.infomaniak.com';
 const DB_PORT = 3306;
-const DB_NAME = 'my_database';
-const DB_USER = 'username';
-const DB_PASSWORD = 'password';
+const DB_NAME = 'jp2f9l_fulltimed';
+const DB_USER = 'jp2f9l_fulltimed';
+const DB_PASSWORD = 'MaxouMirko234!!';
 
 $dsn = "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=utf8mb4";
 
