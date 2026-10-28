@@ -1,5 +1,4 @@
 <?php
-<?php
 const DB_HOST = 'jp2f9l.myd.infomaniak.com';
 const DB_PORT = 3306;
 const DB_NAME = 'jp2f9l_fulltimed';
@@ -10,7 +9,7 @@ $dsn = "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";c
 
 $pdo = new PDO($dsn, DB_USER, DB_PASSWORD);
 
-$sql = "SELECT * FROM my_table";
+$sql = "SELECT * FROM role";
 
 $stmt = $pdo->prepare($sql);
 
@@ -39,8 +38,7 @@ $results = $stmt->fetchAll();
         <?php foreach ($results as $row) { ?>
             <li>ID: <?= htmlspecialchars($row['id']) ?>
                 <ul>
-                    <li>Column1: <?= htmlspecialchars($row['column1']) ?></li>
-                    <li>Column2: <?= htmlspecialchars($row['column2']) ?></li>
+                    <li>Column1: <?= htmlspecialchars($row['nom']) ?></li>
                 </ul>
             </li>
         <?php } ?>

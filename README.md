@@ -205,6 +205,9 @@ automatiquement arrêtés. Dès que vous rouvrez Visual Studio Code et que vous
 exécutez à nouveau la commande `docker compose up`, les services Docker seront
 redémarrés.
 
+# Lien du site
+https://fulltimed.ch/
+
 # Cahier des charges
 
 ## 1. Équipe
