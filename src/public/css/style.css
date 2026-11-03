@@ -1,0 +1,361 @@
+/* ============================================================
+   Fulltimed : styles de base (thème sombre, accent vert citron)
+   ============================================================ */
+
+/* Couleurs de la maquette, réutilisables partout avec var(--nom) */
+:root {
+	--bg: #0e0f11;
+	--surface: #17191c;
+	--surface2: #1f2226;
+	--border: #2a2e33;
+	--text: #f2f3f5;
+	--muted: #9aa0a6;
+	--accent: #c6f135;
+	--on-accent: #0e0f11;
+	--star: #f5c84c;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: var(--bg);
+	color: var(--text);
+	font-family: "DM Sans", sans-serif;
+	font-size: 15px;
+	line-height: 1.5;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+ul {
+	list-style: none;
+}
+
+h1,
+h2,
+.logo,
+.score {
+	font-family: "Barlow Condensed", sans-serif;
+	font-weight: 800;
+	text-transform: uppercase;
+	line-height: 1;
+}
+
+.muted {
+	color: var(--muted);
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+	border-bottom: 1px solid var(--border);
+}
+
+.navbar-inner {
+	display: flex;
+	align-items: center;
+	gap: 40px;
+	max-width: 1400px;
+	margin: 0 auto;
+	padding: 16px 40px;
+}
+
+.logo {
+	font-size: 28px;
+	color: var(--accent);
+}
+
+.nav-links,
+.nav-right {
+	display: flex;
+	align-items: center;
+	gap: 24px;
+}
+
+.nav-right {
+	margin-left: auto;
+}
+
+.nav-links a,
+.langues a {
+	color: var(--muted);
+}
+
+.nav-links a:hover,
+.nav-links a.active,
+.langues a.active {
+	color: var(--text);
+}
+
+/* ---------- Boutons ---------- */
+.btn {
+	display: inline-block;
+	padding: 10px 20px;
+	border-radius: 999px;
+	font-weight: 700;
+}
+
+.btn-primary {
+	background: var(--accent);
+	color: var(--on-accent);
+}
+
+.btn-secondary {
+	background: var(--surface2);
+	border: 1px solid var(--border);
+}
+
+.btn:hover {
+	opacity: 0.85;
+}
+
+/* ---------- Mise en page ---------- */
+.page {
+	display: flex;
+	gap: 40px;
+	max-width: 1400px;
+	margin: 0 auto;
+	padding: 40px 40px 64px;
+}
+
+.main {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 36px;
+}
+
+/* ---------- Barre latérale ---------- */
+.sidebar {
+	width: 250px;
+	flex-shrink: 0;
+}
+
+.search {
+	width: 100%;
+	padding: 10px 14px;
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: 10px;
+	color: var(--text);
+	font: inherit;
+}
+
+.label {
+	margin: 24px 0 10px;
+	font-size: 13px;
+	color: var(--muted);
+	letter-spacing: 0.08em;
+}
+
+.comp-list a {
+	display: block;
+	padding: 8px 12px;
+	border-radius: 8px;
+	color: var(--muted);
+}
+
+.comp-list a:hover,
+.comp-list a.active {
+	background: var(--surface2);
+	color: var(--text);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+	display: flex;
+	align-items: center;
+	gap: 32px;
+	padding: 40px 44px;
+	background: linear-gradient(90deg, var(--surface), rgba(198, 241, 53, 0.12));
+	border: 1px solid var(--border);
+	border-radius: 24px;
+}
+
+.hero-texte {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+	max-width: 460px;
+}
+
+.hero h1 {
+	font-size: 44px;
+}
+
+.badge {
+	align-self: flex-start;
+	padding: 5px 12px;
+	background: rgba(198, 241, 53, 0.14);
+	color: var(--accent);
+	border-radius: 999px;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.badge-star {
+	align-self: center;
+	background: var(--surface2);
+	color: var(--star);
+}
+
+.boutons {
+	display: flex;
+	gap: 12px;
+}
+
+.match-du-jour {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 14px;
+	text-align: center;
+}
+
+/* ---------- Affiche d'un match (équipe – score – équipe) ---------- */
+.affiche {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 16px;
+	font-weight: 700;
+}
+
+.affiche span {
+	flex: 1;
+}
+
+.score {
+	font-size: 32px;
+	white-space: nowrap;
+}
+
+.score-grand {
+	font-size: 54px;
+}
+
+.note {
+	color: var(--star);
+	font-size: 13px;
+	font-weight: 500;
+}
+
+/* ---------- Matchs à l'affiche ---------- */
+.section-titre {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.section-titre h2 {
+	font-size: 26px;
+}
+
+.onglets {
+	display: flex;
+	gap: 8px;
+}
+
+.onglets a {
+	display: block;
+	padding: 7px 14px;
+	background: var(--surface2);
+	border: 1px solid var(--border);
+	border-radius: 999px;
+	color: var(--muted);
+	font-size: 13px;
+}
+
+.onglets a.active {
+	background: var(--accent);
+	border-color: var(--accent);
+	color: var(--on-accent);
+	font-weight: 700;
+}
+
+.grille {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+	gap: 20px;
+}
+
+.carte a {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	height: 100%;
+	padding: 20px;
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: 16px;
+	text-align: center;
+}
+
+.carte a:hover {
+	border-color: var(--accent);
+}
+
+.carte-meta {
+	color: var(--muted);
+	font-size: 12px;
+}
+
+.centre {
+	margin-top: 28px;
+	text-align: center;
+}
+
+/* ---------- Pied de page ---------- */
+.footer {
+	padding: 24px;
+	border-top: 1px solid var(--border);
+	color: var(--muted);
+	font-size: 13px;
+	text-align: center;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 900px) {
+	.navbar-inner,
+	.page {
+		flex-direction: column;
+		align-items: stretch;
+		padding: 16px;
+		gap: 20px;
+	}
+
+	.nav-right {
+		margin-left: 0;
+		flex-wrap: wrap;
+	}
+
+	.sidebar {
+		width: 100%;
+	}
+
+	.hero {
+		flex-direction: column;
+		padding: 24px;
+	}
+
+	.hero h1 {
+		font-size: 34px;
+	}
+
+	.section-titre {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 12px;
+	}
+}

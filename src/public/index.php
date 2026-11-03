@@ -1,48 +1,113 @@
 <?php
-const DB_HOST = 'jp2f9l.myd.infomaniak.com';
-const DB_PORT = 3306;
-const DB_NAME = 'jp2f9l_fulltimed';
-const DB_USER = 'jp2f9l_fulltimed';
-const DB_PASSWORD = 'MaxouMirko234!!';
+require __DIR__ . '/../includes/bootstrap.php';
 
-$dsn = "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=utf8mb4";
+// Onglet actif, uniquement parmi les tris autorisés
+$tri = $_GET['tri'] ?? 'populaires';
+if (!isset(MatchManager::TRIS[$tri])) {
+    $tri = 'populaires';
+}
 
-$pdo = new PDO($dsn, DB_USER, DB_PASSWORD);
+// Récupération des données
+$matchManager = new MatchManager();
+$competitionManager = new CompetitionManager();
 
-$sql = "SELECT * FROM role";
+$competitions = $competitionManager->getAll();
+$matchDuJour  = $matchManager->getMatchDuJour();
+$matchs       = $matchManager->getMatchsAffiche($tri);
 
-$stmt = $pdo->prepare($sql);
-
-$stmt->execute();
-
-$results = $stmt->fetchAll();
+$titre = 'Fulltimed – Le carnet de matchs des fans';
+$pageActive = 'accueil';
+require __DIR__ . '/../includes/header.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
+<div class="page">
+    <!-- Barre latérale -->
+    <aside class="sidebar">
+        <form action="matchs.php" method="get">
+            <input type="search" name="q" placeholder="Rechercher une équipe…" class="search">
+        </form>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProgServ2 Course PHP Template</title>
-</head>
+        <h2 class="label">Compétitions</h2>
+        <ul class="comp-list">
+            <li><a href="matchs.php" class="active">Toutes les compétitions</a></li>
+            <?php foreach ($competitions as $comp): ?>
+                <li><a href="matchs.php?competition=<?= $comp['id'] ?>"><?= e($comp['nom']) ?></a></li>
+            <?php endforeach; ?>
+        </ul>
+    </aside>
 
-<body>
-    <h1>ProgServ2 Course PHP Template</h1>
+    <main class="main">
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-texte">
+                <p class="badge">Le carnet de matchs des fans</p>
+                <h1>Note chaque match. Garde ceux qui t'ont fait vibrer.</h1>
+                <p class="muted">Suis les matchs que tu regardes, note-les, commente-les et découvre ce que la communauté en a pensé.</p>
 
-    <p>Bienvenue dans votre projet PHP pour le cours ProgServ2 à la HEIG-VD !</p>
+                <div class="boutons">
+                    <?php if (!$user): ?>
+                        <a href="inscription.php" class="btn btn-primary">Créer un compte</a>
+                    <?php endif; ?>
+                    <a href="matchs.php" class="btn btn-secondary">Explorer les matchs</a>
+                </div>
+            </div>
 
-    <h2>Résultats de la base de données :</h2>
+            <?php if ($matchDuJour): ?>
+                <article class="match-du-jour">
+                    <p class="badge badge-star">Match du jour</p>
+                    <a href="match.php?id=<?= $matchDuJour->getId() ?>" class="affiche">
+                        <span><?= e($matchDuJour->getEquipeDomicile()) ?></span>
+                        <strong class="score score-grand"><?= $matchDuJour->getScore() ?></strong>
+                        <span><?= e($matchDuJour->getEquipeExterieur()) ?></span>
+                    </a>
+                    <p class="muted"><?= e($matchDuJour->getCompetition()) ?> · <?= $matchDuJour->getDateCourte() ?></p>
+                    <?php if ($matchDuJour->aDesAvis()): ?>
+                        <p class="note">★ <?= $matchDuJour->getMoyenne() ?> · <?= $matchDuJour->getNbAvis() ?> avis</p>
+                    <?php endif; ?>
+                </article>
+            <?php endif; ?>
+        </section>
 
-    <ul>
-        <?php foreach ($results as $row) { ?>
-            <li>ID: <?= htmlspecialchars($row['id']) ?>
-                <ul>
-                    <li>Column1: <?= htmlspecialchars($row['nom']) ?></li>
+        <!-- Matchs à l'affiche -->
+        <section>
+            <div class="section-titre">
+                <h2>Matchs à l'affiche</h2>
+                <ul class="onglets">
+                    <li><a href="?tri=populaires" class="<?= $tri === 'populaires' ? 'active' : '' ?>">Populaires</a></li>
+                    <li><a href="?tri=recents" class="<?= $tri === 'recents' ? 'active' : '' ?>">Récents</a></li>
+                    <li><a href="?tri=mieux-notes" class="<?= $tri === 'mieux-notes' ? 'active' : '' ?>">Mieux notés</a></li>
                 </ul>
-            </li>
-        <?php } ?>
-    </ul>
-</body>
+            </div>
 
-</html>
+            <?php if (empty($matchs)): ?>
+                <p class="muted">Aucun match pour l'instant.</p>
+            <?php else: ?>
+                <div class="grille">
+                    <?php foreach ($matchs as $match): ?>
+                        <article class="carte">
+                            <a href="match.php?id=<?= $match->getId() ?>">
+                                <p class="carte-meta"><?= e($match->getCompetition()) ?> · <?= $match->getDateCourte() ?></p>
+                                <p class="affiche">
+                                    <span><?= e($match->getEquipeDomicile()) ?></span>
+                                    <strong class="score"><?= $match->getScore() ?></strong>
+                                    <span><?= e($match->getEquipeExterieur()) ?></span>
+                                </p>
+                                <?php if ($match->aDesAvis()): ?>
+                                    <p class="note">★ <?= $match->getMoyenne() ?> · <?= $match->getNbAvis() ?> avis</p>
+                                <?php else: ?>
+                                    <p class="muted">Pas encore noté</p>
+                                <?php endif; ?>
+                            </a>
+                        </article>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+
+            <div class="centre">
+                <a href="matchs.php" class="btn btn-secondary">Voir plus de matchs →</a>
+            </div>
+        </section>
+    </main>
+</div>
+
+<?php require __DIR__ . '/../includes/footer.php'; ?>
