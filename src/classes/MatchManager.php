@@ -48,7 +48,7 @@ class MatchManager {
             ")->fetch();
         }
 
-        return $row ? FootballMatch::fromRow($row) : null;
+        return $row ? $this->creerMatch($row) : null;
     }
 
     /**
@@ -68,7 +68,29 @@ class MatchManager {
         $stmt->bindValue(':limite', $limite, PDO::PARAM_INT);
         $stmt->execute();
 
-        return array_map([FootballMatch::class, 'fromRow'], $stmt->fetchAll());
+        $matchs = [];
+        foreach ($stmt->fetchAll() as $row) {
+            $matchs[] = $this->creerMatch($row);
+        }
+        return $matchs;
+    }
+
+    /**
+     * Crée un match à partir d'une ligne renvoyée par la base.
+     */
+    public function creerMatch(array $row): FootballMatch {
+        return new FootballMatch(
+            (int) $row['id'],
+            $row['date_heure'],
+            $row['score_domicile'] !== null ? (int) $row['score_domicile'] : null,
+            $row['score_exterieur'] !== null ? (int) $row['score_exterieur'] : null,
+            $row['equipe_dom'],
+            $row['equipe_ext'],
+            $row['competition'],
+            $row['moyenne'] !== null ? (float) $row['moyenne'] : null,
+            (int) $row['nb_avis'],
+            $row['description'] ?? null,
+        );
     }
 
 
@@ -80,6 +102,6 @@ class MatchManager {
         $stmt->execute(['id' => $id]);
         $row = $stmt->fetch();
 
-        return $row ? FootballMatch::fromRow($row) : null;
+        return $row ? $this->creerMatch($row) : null;
     }
 }
