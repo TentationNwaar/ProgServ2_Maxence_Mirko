@@ -206,6 +206,7 @@ exécutez à nouveau la commande `docker compose up`, les services Docker seront
 redémarrés.
 
 # Lien du site
+
 https://fulltimed.ch/
 
 # Cahier des charges
@@ -217,10 +218,10 @@ Weyermann Maxence & Martone Mirko
 ## 2. Présentation du projet
 
 Dans le football, il existe de nombreuses applications pour suivre son équipe,
-suivre les matchs, s'informer ou noter les joueurs lors d'une rencontre.
-En revanche, il n'existe pas réellement d'application communautaire permettant
-de noter les matchs et de garder une trace de ceux qu'on a regardés, en
-particulier ceux qui nous ont fait vibrer.
+suivre les matchs, s'informer ou noter les joueurs lors d'une rencontre. En
+revanche, il n'existe pas réellement d'application communautaire permettant de
+noter les matchs et de garder une trace de ceux qu'on a regardés, en particulier
+ceux qui nous ont fait vibrer.
 
 L'aspect communautaire est lui aussi limité : à part les réseaux sociaux
 traditionnels, il n'existe pas d'espace dédié pour discuter des matchs, des
@@ -237,30 +238,38 @@ Fulltimed répond à ce besoin. L'application permet de :
 ## 3. Fonctionnalités principales
 
 ### Authentification
+
 - Inscription, connexion, déconnexion (e-mail + mot de passe)
 
 ### Page d'accueil
+
 - Aperçu des matchs principaux
 - Un bouton « Voir plus » redirige vers la page Matchs
 
 ### Page Matchs
+
 - Matchs du jour
 - Filtre par compétition
 - Calendrier
 
 ### Page d'un match
+
 - Informations utiles : description, stade, classement, forme des équipes
-- Actions : noter le match, l'ajouter à la liste « à regarder », le mettre en favori, le commenter
+- Actions : noter le match, l'ajouter à la liste « à regarder », le mettre en
+  favori, le commenter
 - Avis de la communauté et note moyenne
 
 ### Page Communauté
+
 - Derniers posts de la communauté sur différents matchs
-- Chaque post contient : nom d'utilisateur, note du match, match concerné, commentaire
+- Chaque post contient : nom d'utilisateur, note du match, match concerné,
+  commentaire
 - Posts des amis
 - Clic sur un nom d'utilisateur pour accéder à son profil
 - Possibilité de répondre à un post et de le liker
 
 ### Profil personnel
+
 - Liste des matchs à regarder
 - Historique des matchs notés
 - Liste des matchs commentés
@@ -270,6 +279,7 @@ Fulltimed répond à ce besoin. L'application permet de :
 - Bouton de modification du profil (bio, équipes favorites, nom d'utilisateur)
 
 ### Profil d'un autre utilisateur (ami)
+
 - Liste des matchs à regarder
 - Derniers matchs vus
 - Liste des matchs commentés
@@ -279,32 +289,35 @@ Fulltimed répond à ce besoin. L'application permet de :
 - Matchs préférés (favori)
 
 ### Rôle administrateur
+
 - Ajout et modification des matchs
   - Bouton « Ajouter un match » dans la page Matchs
   - Formulaire d'ajout prédéfini, il suffit de remplir les informations
 - Modération : suppression de commentaires, suppression d'utilisateurs
 
 ### Autres
+
 - Deux langues (français, anglais)
 - Envoi d'un e-mail (ex. e-mail de bienvenue à l'inscription)
-- Les matchs sont ajoutés par l'administrateur ; un jeu de données de test est fourni dans un fichier SQL
+- Les matchs sont ajoutés par l'administrateur ; un jeu de données de test est
+  fourni dans un fichier SQL
 
 ## 4. Utilisateurs et rôles
 
-| Action                                           | Visiteur | Utilisateur | Administrateur |
-| :----------------------------------------------- | :------: | :---------: | :------------: |
-| Créer un compte / se connecter                   |   Oui    |     Non     |      Non       |
-| Voir la page d'accueil et les matchs du jour     |   Oui    |     Oui     |      Oui       |
-| Voir la page d'un match, sa note moyenne et ses commentaires | Oui | Oui |      Oui       |
-| Noter et commenter un match                      |   Non    |     Oui     |      Oui       |
-| Ajouter un match à sa liste « à regarder »       |   Non    |     Oui     |      Oui       |
-| Consulter son profil et son historique           |   Non    |     Oui     |      Oui       |
-| Modifier son profil                              |   Non    |     Oui     |      Oui       |
-| Voir la page Communauté et les profils des autres |  Non    |     Oui     |      Oui       |
-| Liker / répondre à un post                       |   Non    |     Oui     |      Oui       |
-| Ajouter un utilisateur en ami                    |   Non    |     Oui     |      Oui       |
-| Ajouter / modifier un match                      |   Non    |     Non     |      Oui       |
-| Supprimer un commentaire ou un utilisateur       |   Non    |     Non     |      Oui       |
+| Action                                                       | Visiteur | Utilisateur | Administrateur |
+| :----------------------------------------------------------- | :------: | :---------: | :------------: |
+| Créer un compte / se connecter                               |   Oui    |     Non     |      Non       |
+| Voir la page d'accueil et les matchs du jour                 |   Oui    |     Oui     |      Oui       |
+| Voir la page d'un match, sa note moyenne et ses commentaires |   Oui    |     Oui     |      Oui       |
+| Noter et commenter un match                                  |   Non    |     Oui     |      Oui       |
+| Ajouter un match à sa liste « à regarder »                   |   Non    |     Oui     |      Oui       |
+| Consulter son profil et son historique                       |   Non    |     Oui     |      Oui       |
+| Modifier son profil                                          |   Non    |     Oui     |      Oui       |
+| Voir la page Communauté et les profils des autres            |   Non    |     Oui     |      Oui       |
+| Liker / répondre à un post                                   |   Non    |     Oui     |      Oui       |
+| Ajouter un utilisateur en ami                                |   Non    |     Oui     |      Oui       |
+| Ajouter / modifier un match                                  |   Non    |     Non     |      Oui       |
+| Supprimer un commentaire ou un utilisateur                   |   Non    |     Non     |      Oui       |
 
 **Pages publiques** (accessibles sans connexion) :
 
@@ -316,7 +329,8 @@ Fulltimed répond à ce besoin. L'application permet de :
 
 **Pages privées** (accessibles après connexion) :
 
-- Profil personnel (historique des matchs notés, liste « à regarder », matchs commentés)
+- Profil personnel (historique des matchs notés, liste « à regarder », matchs
+  commentés)
 - Modification du profil
 - Page Communauté
 - Profil d'un autre utilisateur
@@ -333,5 +347,113 @@ Ce projet est réalisé dans le cadre des études à la HEIG-VD, dans le cours
 Programmation serveur 2 (ProgServ2). Il est développé en PHP sans framework
 externe, avec une base de données MySQL/MariaDB.
 
-Une IA (Claude) a été utilisée le 28.09.2026 pour relire le document. Nous avons
-rédigé le contenu et pris les décisions nous-mêmes.
+## Maquettes
+
+Les maquettes sont disponibles sous deux formes :
+
+- **Basse fidélité** (wireframes) : dossier
+  [`Maquette/basse-fidelite/`](Maquette/basse-fidelite/), 14 écrans.
+- **Haute fidélité** : dossier
+  [`Maquette/haute-fidelite/`](Maquette/haute-fidelite/), 13 écrans exportés
+  depuis Figma (accueil, matchs, fiche d'un match, connexion, inscription,
+  communauté, journal, profil d'un ami, ma liste, historique, ajout /
+  modification d'un match et modération).
+
+Lien vers la maquette haute fidélité sur Figma :
+<https://www.figma.com/design/gfWI3bEz3JeoRwZAvLp2xS/Test?node-id=23-2>
+
+## Utilisation de l'IA
+
+Nous avons utilisé l'IA Claude (Anthropic) comme outil d'aide et d'explication.
+Certaines parties du code ont aussi été générées par l'IA, puis relues et
+corrigées par nous. Les usages sont détaillés ci-dessous, par étape.
+
+### Cahier des charges
+
+Le 28.09.2026, nous avons demandé à Claude de relire le document et de nous
+aider à compléter les sections 5 et 6. Il a proposé le tableau des rôles et les
+actions de l'administrateur. Nous les avons relus et modifiés. Nous l'avons fait
+pour vérifier que le cahier des charges était cohérent avec les consignes.
+
+### Maquettes
+
+Le 06.10.2026, Maxence a demandé à Claude ce qu'il manquait sur nos maquettes
+par rapport au cahier des charges, et nous avons fait un brainstorming avec lui
+pour les concevoir. Nous l'avons fait pour nous assurer que chaque
+fonctionnalité avait une page.
+
+Le 01.11.2026, Mirko a demandé à Claude de réaliser la version haute fidélité de
+la maquette Figma à partir de notre wireframe (voir la section « Maquettes »).
+
+### MCD / MLD
+
+Le 12.10.2026, Claude nous a aidés à vérifier le MCD et le MLD (liaisons,
+attributs, normalisation). Nous avons mis en lien ce que nous avions appris au
+cours de base de données l'année dernière et dans ce cours. Après plusieurs
+questions et doutes, l'IA a répondu à nos interrogations, et nous avons pris
+nous-mêmes les décisions finales. À la suite de ces échanges, le modèle a changé
+sur les points suivants :
+
+- Suivi entre utilisateurs à sens unique (comme sur Letterboxd) plutôt qu'une
+  amitié réciproque.
+- Correction de plusieurs cardinalités et attributs du MCD.
+- Normalisation au stade du MLD : tables `pays`, `role` et `type_equipe`.
+- Les tables de jointure gardent leur propre `id`, avec une contrainte UNIQUE
+  sur la paire de clés étrangères, pour empêcher par exemple de mettre deux fois
+  le même match en favori.
+- `a_regarder` et `favori` restent deux tables séparées, malgré leur structure
+  identique.
+- Les champs scores, commentaire et pays d'une compétition peuvent être vides.
+- L'IA a confirmé que certaines règles ne s'expriment pas dans le MLD et doivent
+  être gérées par des CHECK ou en PHP : équipe à domicile différente de l'équipe
+  extérieure, note entre 0 et 5, interdiction de se suivre soi-même.
+
+Les tables `categorie` et `stade` ont été retirées ensuite, à la suite du retour
+du professeur et non de l'IA.
+
+### Script SQL (MPD)
+
+Mi-octobre, Mirko a demandé à Claude de générer une première version de
+`script.sql` à partir de notre MLD. L'IA l'a testée sur une base MariaDB
+(contraintes CHECK, UNIQUE, clés étrangères, ON DELETE CASCADE) et a apporté
+deux corrections : le comportement à la suppression d'une catégorie, et le
+constat que l'interdiction de se suivre soi-même doit être vérifiée en PHP. Elle
+a aussi expliqué l'erreur #1044 dans phpMyAdmin (droits sur la base
+`my_database`).
+
+Le 28.10.2026, l'IA a adapté ce script au nouveau MLD (suppression des tables
+`categorie` et `stade` et de leurs clés étrangères, ajout d'un en-tête
+`DROP TABLE` pour pouvoir le réimporter).
+
+### Git et environnement de développement
+
+À certains moments du projet entre le 12.10.2026 et le 02.11.2026, nous avons
+rencontré des erreurs avec Docker (`read-only file system`) et Git
+(`dubious ownership`, push sur `main` sans pull request). Claude nous a expliqué
+les causes et les commandes à utiliser, que nous avons appliquées nous-mêmes.
+Nous l'avons fait pour débloquer notre environnement et comprendre le workflow
+des pull requests.
+
+### Déploiement
+
+Les 27 et 28.10.2026, nous avons demandé à Claude de nous expliquer les offres
+d'Infomaniak et les étapes de déploiement, car nous avions des soucis avec
+l'offre étudiante. Nous l'avons fait pour mettre le site en ligne avant
+l'expiration de l'hébergement étudiant. Le 28.10.2026, Mirko a aussi demandé à
+l'IA de corriger des erreurs dans `index.php` (configuration de la base, balise
+`<?php` en double, requête restée du modèle du cours).
+
+### Code PHP
+
+Les 02 et 03.11.2026, Mirko a demandé à Claude de générer la structure HTML/PHP
+de la page d'accueil (`index.php`) et de la page d'un match (`match.php`), avec
+des données temporaires en tableaux PHP. Nous avons complété à deux les classes
+`Database`, `FootballMatch`, `MatchManager`, `AvisManager`,
+`CompetitionManager`, `bootstrap.php`, les requêtes SQL et le CSS puis optimisé
+et relu le tout avec Claude.
+
+### Suivi du projet
+
+Le 04.11.2026, nous avons demandé à Claude d'analyser le dépôt pour lister ce
+qui était fait et ce qui manquait. Nous nous sommes servis de cette liste pour
+répartir le travail.
