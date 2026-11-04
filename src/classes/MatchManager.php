@@ -4,14 +4,12 @@
  * Toutes les requêtes SQL qui concernent les matchs.
  */
 class MatchManager {
-    // Tris autorisés pour les matchs à l'affiche (liste blanche)
     public const TRIS = [
         'populaires'  => 'nb_avis DESC',
         'recents'     => 'm.date_heure DESC',
         'mieux-notes' => 'moyenne DESC',
     ];
 
-    // Partie commune à toutes les requêtes : équipes, compétition, notes
     private const SELECT = "
         SELECT m.id, m.date_heure, m.description, m.score_domicile, m.score_exterieur,
                dom.nom AS equipe_dom,
@@ -32,9 +30,7 @@ class MatchManager {
         $this->pdo = Database::getConnection();
     }
 
-    /**
-     * Le premier match d'aujourd'hui, sinon le match terminé le plus commenté.
-     */
+
     public function getMatchDuJour(): ?FootballMatch {
         $row = $this->pdo->query(self::SELECT . "
             WHERE DATE(m.date_heure) = CURDATE()
@@ -60,8 +56,7 @@ class MatchManager {
      * @return FootballMatch[]
      */
     public function getMatchsAffiche(string $tri, int $limite = 6): array {
-        // Un ORDER BY ne peut pas être un paramètre de requête préparée,
-        // donc on n'accepte que les valeurs de la liste blanche.
+
         $ordre = self::TRIS[$tri] ?? self::TRIS['populaires'];
 
         $stmt = $this->pdo->prepare(self::SELECT . "
@@ -76,9 +71,7 @@ class MatchManager {
         return array_map([FootballMatch::class, 'fromRow'], $stmt->fetchAll());
     }
 
-    /**
-     * Un match par son id, ou null s'il n'existe pas.
-     */
+
     public function getById(int $id): ?FootballMatch {
         $stmt = $this->pdo->prepare(self::SELECT . "
             WHERE m.id = :id

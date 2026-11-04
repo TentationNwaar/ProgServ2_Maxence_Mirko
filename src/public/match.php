@@ -18,7 +18,6 @@ if (!$match) {
     exit;
 }
 
-// --- 2. Traiter le formulaire d'avis (seulement si connecté) ---
 $erreur = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $user && $match->estJoue()) {
@@ -41,7 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $user && $match->estJoue()) {
     }
 }
 
-// --- 3. Récupérer les avis ---
 $avis = $avisManager->getByMatch($match->getId());
 
 $titre = $match->getEquipeDomicile() . ' – ' . $match->getEquipeExterieur() . ' – Fulltimed';
