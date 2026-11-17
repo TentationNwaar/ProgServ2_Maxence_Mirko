@@ -56,16 +56,16 @@ require __DIR__ . '/../includes/header.php';
 
         <div class="affiche">
             <span class="equipe"><?= e($match->getEquipeDomicile()) ?></span>
-            <strong class="score score-grand"><?= $match->getScore() ?></strong>
+            <strong class="score score-grand"><?= e($match->getScore()) ?></strong>
             <span class="equipe"><?= e($match->getEquipeExterieur()) ?></span>
         </div>
 
         <p class="muted">
-            <?= $match->getDateLongue() ?> · <?= $match->estJoue() ? 'Terminé' : 'À venir' ?>
+            <?= e($match->getDateLongue()) ?> · <?= $match->estJoue() ? 'Terminé' : 'À venir' ?>
         </p>
 
         <?php if ($match->aDesAvis()): ?>
-            <p class="note note-grande">★ <?= $match->getMoyenne() ?> / 5 · <?= $match->getNbAvis() ?> avis</p>
+            <p class="note note-grande">★ <?= e($match->getMoyenne()) ?> / 5 · <?= e($match->getNbAvis()) ?> avis</p>
         <?php endif; ?>
 
         <?php if ($match->getDescription()): ?>
@@ -95,7 +95,7 @@ require __DIR__ . '/../includes/header.php';
                 <select name="note" id="note" required>
                     <option value="">Choisir…</option>
                     <?php for ($i = 5; $i >= 0; $i--): ?>
-                        <option value="<?= $i ?>"><?= $i ?> / 5</option>
+                        <option value="<?= e($i) ?>"><?= e($i) ?> / 5</option>
                     <?php endfor; ?>
                 </select>
 
@@ -110,7 +110,7 @@ require __DIR__ . '/../includes/header.php';
 
     <!-- Avis de la communauté -->
     <section class="bloc">
-        <h2>Avis de la communauté (<?= count($avis) ?>)</h2>
+        <h2>Avis de la communauté (<?= e(count($avis)) ?>)</h2>
 
         <?php if (empty($avis)): ?>
             <p class="muted">Aucun avis pour l'instant.</p>
@@ -119,18 +119,18 @@ require __DIR__ . '/../includes/header.php';
                 <?php foreach ($avis as $a): ?>
                     <li class="avis">
                         <div class="avis-entete">
-                            <a href="profil.php?id=<?= $a['id_utilisateur'] ?>" class="avis-auteur">
+                            <a href="profil.php?id=<?= e($a['id_utilisateur']) ?>" class="avis-auteur">
                                 <?= e($a['username']) ?>
                             </a>
-                            <span class="note">★ <?= $a['note'] ?> / 5</span>
-                            <span class="muted"><?= date('d.m.Y', strtotime($a['date'])) ?></span>
+                            <span class="note">★ <?= e($a['note']) ?> / 5</span>
+                            <span class="muted"><?= e(date('d.m.Y', strtotime($a['date']))) ?></span>
                         </div>
 
                         <?php if ($a['commentaire']): ?>
                             <p><?= nl2br(e($a['commentaire'])) ?></p>
                         <?php endif; ?>
 
-                        <p class="muted avis-likes">♥ <?= $a['nb_likes'] ?></p>
+                        <p class="muted avis-likes">♥ <?= e($a['nb_likes']) ?></p>
                     </li>
                 <?php endforeach; ?>
             </ul>

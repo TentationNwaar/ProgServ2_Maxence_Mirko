@@ -12,6 +12,8 @@ class CompetitionManager {
      * @return array 
      */
     public function getAll(): array {
-        return $this->pdo->query("SELECT id, nom FROM competition ORDER BY nom")->fetchAll();
+        $stmt = $this->pdo->prepare("SELECT id, nom FROM competition ORDER BY nom");
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 }

@@ -31,7 +31,7 @@ require __DIR__ . '/../includes/header.php';
         <ul class="comp-list">
             <li><a href="matchs.php" class="active">Toutes les compétitions</a></li>
             <?php foreach ($competitions as $comp): ?>
-                <li><a href="matchs.php?competition=<?= $comp['id'] ?>"><?= e($comp['nom']) ?></a></li>
+                <li><a href="matchs.php?competition=<?= e($comp['id']) ?>"><?= e($comp['nom']) ?></a></li>
             <?php endforeach; ?>
         </ul>
     </aside>
@@ -55,14 +55,14 @@ require __DIR__ . '/../includes/header.php';
             <?php if ($matchDuJour): ?>
                 <article class="match-du-jour">
                     <p class="badge badge-star">Match du jour</p>
-                    <a href="match.php?id=<?= $matchDuJour->getId() ?>" class="affiche">
+                    <a href="match.php?id=<?= e($matchDuJour->getId()) ?>" class="affiche">
                         <span><?= e($matchDuJour->getEquipeDomicile()) ?></span>
-                        <strong class="score score-grand"><?= $matchDuJour->getScore() ?></strong>
+                        <strong class="score score-grand"><?= e($matchDuJour->getScore()) ?></strong>
                         <span><?= e($matchDuJour->getEquipeExterieur()) ?></span>
                     </a>
-                    <p class="muted"><?= e($matchDuJour->getCompetition()) ?> · <?= $matchDuJour->getDateCourte() ?></p>
+                    <p class="muted"><?= e($matchDuJour->getCompetition()) ?> · <?= e($matchDuJour->getDateCourte()) ?></p>
                     <?php if ($matchDuJour->aDesAvis()): ?>
-                        <p class="note">★ <?= $matchDuJour->getMoyenne() ?> · <?= $matchDuJour->getNbAvis() ?> avis</p>
+                        <p class="note">★ <?= e($matchDuJour->getMoyenne()) ?> · <?= e($matchDuJour->getNbAvis()) ?> avis</p>
                     <?php endif; ?>
                 </article>
             <?php endif; ?>
@@ -85,15 +85,15 @@ require __DIR__ . '/../includes/header.php';
                 <div class="grille">
                     <?php foreach ($matchs as $match): ?>
                         <article class="carte">
-                            <a href="match.php?id=<?= $match->getId() ?>">
-                                <p class="carte-meta"><?= e($match->getCompetition()) ?> · <?= $match->getDateCourte() ?></p>
+                            <a href="match.php?id=<?= e($match->getId()) ?>">
+                                <p class="carte-meta"><?= e($match->getCompetition()) ?> · <?= e($match->getDateCourte()) ?></p>
                                 <p class="affiche">
                                     <span><?= e($match->getEquipeDomicile()) ?></span>
-                                    <strong class="score"><?= $match->getScore() ?></strong>
+                                    <strong class="score"><?= e($match->getScore()) ?></strong>
                                     <span><?= e($match->getEquipeExterieur()) ?></span>
                                 </p>
                                 <?php if ($match->aDesAvis()): ?>
-                                    <p class="note">★ <?= $match->getMoyenne() ?> · <?= $match->getNbAvis() ?> avis</p>
+                                    <p class="note">★ <?= e($match->getMoyenne()) ?> · <?= e($match->getNbAvis()) ?> avis</p>
                                 <?php else: ?>
                                     <p class="muted">Pas encore noté</p>
                                 <?php endif; ?>
