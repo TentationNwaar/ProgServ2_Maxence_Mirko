@@ -19,23 +19,6 @@ class FootballMatch {
     ) {
     }
 
-    /**
-     * Crée un match à partir d'une ligne renvoyée par la base.
-     */
-    public static function fromRow(array $row): self {
-        return new self(
-            (int) $row['id'],
-            $row['date_heure'],
-            $row['score_domicile'] !== null ? (int) $row['score_domicile'] : null,
-            $row['score_exterieur'] !== null ? (int) $row['score_exterieur'] : null,
-            $row['equipe_dom'],
-            $row['equipe_ext'],
-            $row['competition'],
-            $row['moyenne'] !== null ? (float) $row['moyenne'] : null,
-            (int) $row['nb_avis'],
-            $row['description'] ?? null,
-        );
-    }
 
     public function getId(): int {
         return $this->id;
