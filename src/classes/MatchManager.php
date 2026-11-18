@@ -32,20 +32,28 @@ class MatchManager {
 
 
     public function getMatchDuJour(): ?FootballMatch {
-        $row = $this->pdo->query(self::SELECT . "
+        $stmt = $this->pdo->prepare(self::SELECT . "
             WHERE DATE(m.date_heure) = CURDATE()
             GROUP BY m.id
             ORDER BY m.date_heure
             LIMIT 1
-        ")->fetch();
+        ");
+
+        // On exécute la requête
+        $stmt->execute();
+
+        // On récupère la première ligne
+        $row = $stmt->fetch();
 
         if (!$row) {
-            $row = $this->pdo->query(self::SELECT . "
+            $stmt = $this->pdo->prepare(self::SELECT . "
                 WHERE m.score_domicile IS NOT NULL
                 GROUP BY m.id
                 ORDER BY nb_avis DESC
                 LIMIT 1
-            ")->fetch();
+            ");
+            $stmt->execute();
+            $row = $stmt->fetch();
         }
 
         return $row ? $this->creerMatch($row) : null;
